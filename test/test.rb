@@ -1,61 +1,43 @@
-module Generate
+module Gena
 
-  class Test < BaseTemplate
+  class Test < Plugin
 
-    @tests_path
+    desc 'test CLASS_NAME', 'Generates template for unit test and puts into correct path'
 
-    def initialize(options, config)
-      super
-      @tests_path = generate_tests_path
-      options[:generate_tests] = true
-      folder_name = @tests_path.split(File::SEPARATOR)[-1]
-      options[:class_name] = options[:name].dup
-      options[:name] = folder_name
-    end
+    def test(class_name)
 
-    def generate_tests_path
-      sources_dir = self.config['sources_dir']
-      source_path = `find ./#{sources_dir} -name "#{options[:name]}.m"`
-      source_path["./#{sources_dir}/"] = ''
-      source_path["/#{options[:name]}.m"] = ''
-      source_path.gsub!(/\s+/, ' ').strip!
-      source_path
-    end
+      filepath = `find #{self.sources_path} -name "#{class_name}.m"`
 
-    def tests_path
-      @tests_path.split(File::SEPARATOR)[0..-2].join(File::SEPARATOR)
-    end
+      if filepath.empty?
+        say "Can't find path for file '#{class_name}.m'", Color::RED
+        abort
+      end
 
-    def assembly?
-      options[:class_name].downcase.include? 'assembly'
-    end
+      say "Found class at path #{filepath}", Color::GREEN if $verbose
 
-    def template_test_files
-      if assembly?
-        [
-            {
-                'name' => 'Tests.m', 'path' => 'Tests/tests_assembly.m.liquid',
-                'custom_name' => "#{options[:class_name]}Tests.m"
-            }
-        ]
+      relative_dir = self.source_dir_from_file_path(filepath)
+
+      params = {
+          'class_name' => class_name
+      }
+
+      codegen = Codegen.new(relative_dir, params)
+
+      if class_name.downcase.include? 'assembly'
+        codegen.add_file('Tests/tests_assembly.m.liquid', "#{class_name}Tests.m", Filetype::TEST_SOURCE)
       else
-        [
-            {   'name' => 'Tests.m', 'path' => 'Tests/tests.m.liquid',
-                'custom_name' => "#{options[:class_name]}Tests.m"
-            },
-            {
-                'name' => 'Testable.h', 'path' => 'Tests/testable_category.h.liquid',
-                'custom_name' => "#{options[:class_name]}_Testable.h"
-            }
-        ]
+        codegen.add_file('Tests/tests.m.liquid', "#{class_name}Tests.m", Filetype::TEST_SOURCE)
+        codegen.add_file('Tests/testable_category.h.liquid', "#{class_name}_Testable.h", Filetype::TEST_SOURCE)
+      end
+
+    end
+
+    no_tasks do
+      def source_dir_from_file_path(filepath)
+        filepath["#{self.sources_path}/"] = ''
+        filepath.gsub!(/\s+/, ' ').strip!
+        File.dirname(filepath)
       end
     end
-
-
-    def template_parameters
-      { class_name: options[:class_name]}
-    end
-
   end
-
 end

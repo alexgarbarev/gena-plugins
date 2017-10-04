@@ -2,10 +2,10 @@
 
 #import <UIKit/UIKit.h>
 
-#import "{{ prefix }}{{ module_info.name }}ViewInputOutput.h"
+#import "{{ prefix }}{{ module_name }}ViewInputOutput.h"
 
-@interface {{ prefix }}{{ module_info.name }}ViewController : UIViewController <{{ prefix }}{{ module_info.name }}ViewInput>
+@interface {{ prefix }}{{ module_name }}ViewController : UIViewController <{{ prefix }}{{ module_name }}ViewInput>
 
-@property (nonatomic, strong) id<{{ prefix }}{{ module_info.name }}ViewOutput> output;
+@property (nonatomic, strong) id<{{ prefix }}{{ module_name }}ViewOutput> output;
 
 @end

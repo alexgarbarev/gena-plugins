@@ -1,11 +1,11 @@
 {% include 'header' %}
 
 #import <ComponentsHub/CCTableViewCellFactory.h>
-#import "{{ prefix }}{{ module_info.name }}CellItem.h"
-#import "{{ prefix }}{{ module_info.name }}Cell.h"
+#import "{{ prefix }}{{ cell_name }}CellItem.h"
+#import "{{ prefix }}{{ cell_name }}Cell.h"
 
 
-@implementation {{ prefix }}{{ module_info.name }}CellItem
+@implementation {{ prefix }}{{ cell_name }}CellItem
 
 //-------------------------------------------------------------------------------------------
 #pragma mark - Overridden Methods
@@ -13,7 +13,7 @@
 
 - (CCTableViewCellFactory *)cellFactoryForCurrentItem
 {
-    return [CCTableViewCellFactory withCellClass:[{{ prefix }}{{ module_info.name }}Cell class] reusable:YES];
+    return [CCTableViewCellFactory withCellClass:[{{ prefix }}{{ cell_name }}Cell class] reusable:YES];
 }
 
 @end

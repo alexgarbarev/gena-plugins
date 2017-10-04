@@ -1,9 +1,9 @@
 {% include 'header' %}
 
-#import "{{ prefix }}RequestTo{{ module_info.name }}.h"
+#import "{{ prefix }}RequestTo{{ request_name }}.h"
 
 
-@implementation {{ prefix }}RequestTo{{ module_info.name }}
+@implementation {{ prefix }}RequestTo{{ request_name }}
 
 //-------------------------------------------------------------------------------------------
 #pragma mark - Required Methods
@@ -16,18 +16,18 @@
 
 - (TRCRequestMethod)method
 {
-    return TRCRequestMethod{{ custom_parameters.http_method}};
+    return TRCRequestMethod{{ http_method}};
 }
 
 //-------------------------------------------------------------------------------------------
 #pragma mark - Request Methods
 //-------------------------------------------------------------------------------------------
-{% if custom_parameters.include_request_path %}
+{% if include_request_path %}
 - (NSDictionary *)pathParameters
 {
     return @{ };
 }{% endif %}
-{% if custom_parameters.include_request_body %}
+{% if include_request_body %}
 - (id)requestBody
 {
     return @{

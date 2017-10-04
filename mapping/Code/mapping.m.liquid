@@ -1,25 +1,25 @@
 {% include 'header' %}
 
-#import "{{ prefix }}{{ module_info.name }}Mapping.h"
-#import "{{ custom_parameters.class_name }}.h"
+#import "{{ prefix }}{{ name }}Mapping.h"
+#import "{{ class_name }}.h"
 #import "NSObject+TyphoonDefaultFactory.h"
 #import "{{ prefix }}RestClient.h"
 #import "CCRestClientRegistry.h"
 
-@implementation {{ prefix }}{{ module_info.name }}Mapping
+@implementation {{ prefix }}{{ name }}Mapping
 
 REGISTER_MAPPING
 
 + (void)registerWithRestClient:(CCRestClient *)restClient
 {
-    [restClient registerObjectMapper:[{{ prefix }}{{ module_info.name }}Mapping newUsingTyphoon] forTag:@"{{ custom_parameters.mapping_tag }}"];
-}{% if custom_parameters.include_request %}
+    [restClient registerObjectMapper:[{{ prefix }}{{ name }}Mapping newUsingTyphoon] forTag:@"{{ mapping_tag }}"];
+}{% if include_request %}
 
 //-------------------------------------------------------------------------------------------
 #pragma mark - Request
 //-------------------------------------------------------------------------------------------
 
-- (NSDictionary *)requestObjectFromObject:({{ custom_parameters.class_name }} *)object error:(NSError **)error
+- (NSDictionary *)requestObjectFromObject:({{ class_name }} *)object error:(NSError **)error
 {
     NSMutableDictionary *requestDict = [NSMutableDictionary new];
 {{ properties_composing }}
@@ -30,9 +30,9 @@ REGISTER_MAPPING
 #pragma mark - Response
 //-------------------------------------------------------------------------------------------
 
-- ({{custom_parameters.class_name }} *)objectFromResponseObject:(NSDictionary *)responseObject error:(NSError **)error
+- ({{class_name }} *)objectFromResponseObject:(NSDictionary *)responseObject error:(NSError **)error
 {
-    {{ custom_parameters.class_name }} *instance = [{{ custom_parameters.class_name }} new];
+    {{ class_name }} *instance = [{{ class_name }} new];
 {{ properties_parsing }}
     return instance;
 }

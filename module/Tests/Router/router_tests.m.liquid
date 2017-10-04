@@ -3,15 +3,15 @@
 #import <XCTest/XCTest.h>
 #import <OCMock/OCMock.h>
 
-#import "{{ prefix }}{{ module_info.name }}Router.h"
+#import "{{ prefix }}{{ module_name }}Router.h"
 
-@interface {{ prefix }}{{ module_info.name }}RouterTests : XCTestCase
+@interface {{ prefix }}{{ module_name }}RouterTests : XCTestCase
 
-@property (nonatomic, strong) {{ prefix }}{{ module_info.name }}Router *router;
+@property (nonatomic, strong) {{ prefix }}{{ module_name }}Router *router;
 
 @end
 
-@implementation {{ prefix }}{{ module_info.name }}RouterTests
+@implementation {{ prefix }}{{ module_name }}RouterTests
 
 //-------------------------------------------------------------------------------------------
 #pragma mark - Setup
@@ -20,7 +20,7 @@
 - (void)setUp 
 {
     [super setUp];
-    self.router = [[{{ prefix }}{{ module_info.name }}Router alloc] init];
+    self.router = [[{{ prefix }}{{ module_name }}Router alloc] init];
 }
 
 - (void)tearDown 

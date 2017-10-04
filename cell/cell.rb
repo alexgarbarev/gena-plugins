@@ -1,45 +1,30 @@
+module Gena
 
-module Generate
+  class Cell < Plugin
 
-  class Cell < BaseTemplate
+    desc 'cell CELL_NAME', 'Generates cell and it\'s item to use with CCTableViewManager'
+    method_option :path, :aliases => '-p', :desc => 'Specifies custom subdirectory'
 
-    def sources_path
-      "#{self.type_config['path']}/#{options[:scope]}/View/Cells"
+    def cell(cell_name)
+
+      path = self.plugin_config['path']
+      path = File.join(path, options[:path]) if options[:path]
+      path = File.join(path, cell_name)
+
+      codegen = Codegen.new(path, {'cell_name' => cell_name})
+
+      codegen.add_file('Code/CellViews/Cell.h.liquid', "#{self.config['prefix']}#{ cell_name}Cell.h", Filetype::SOURCE)
+      codegen.add_file('Code/CellViews/Cell.m.liquid', "#{self.config['prefix']}#{ cell_name}Cell.m", Filetype::SOURCE)
+      codegen.add_file('Code/CellItems/CellItem.h.liquid', "#{self.config['prefix']}#{ cell_name}CellItem.h", Filetype::SOURCE)
+      codegen.add_file('Code/CellItems/CellItem.m.liquid', "#{self.config['prefix']}#{ cell_name}CellItem.m", Filetype::SOURCE)
+
     end
 
-    def template_source_files
-      files = []
-      files << {
-          'name' => 'Cell.h',
-          'path' => 'Code/CellViews/Cell.h.liquid',
-          'custom_name' => "{{ prefix }}{{ module_info.name }}Cell.h"
-      }
-      files << {
-          'name' => 'Cell.m',
-          'path' => 'Code/CellViews/Cell.m.liquid',
-          'custom_name' => "{{ prefix }}{{ module_info.name }}Cell.m"
-      }
-      files << {
-          'name' => 'CellItem.h',
-          'path' => 'Code/CellItems/CellItem.h.liquid',
-          'custom_name' => "{{ prefix }}{{ module_info.name }}CellItem.h"
-      }
-      files << {
-          'name' => 'CellItem.m',
-          'path' => 'Code/CellItems/CellItem.m.liquid',
-          'custom_name' => "{{ prefix }}{{ module_info.name }}CellItem.m"
-      }
-      files
+    no_tasks do
+      def self.plugin_config_defaults
+        {'path' => 'Presentation/UserStories'}
+      end
     end
-
-    def template_test_files
-      []
-    end
-
-    def template_parameters
-      {}
-    end
-
   end
 
 end

@@ -1,9 +1,9 @@
 {% include 'header' %}
 
-#import "{{ prefix }}{{ module_info.name }}ViewController.h"
+#import "{{ prefix }}{{ module_name }}ViewController.h"
 #import "UIViewController+StatusUI.h"
 
-@implementation {{ prefix }}{{ module_info.name }}ViewController
+@implementation {{ prefix }}{{ module_name }}ViewController
 
 //-------------------------------------------------------------------------------------------
 #pragma mark - Lifecycle events
@@ -16,7 +16,7 @@
 }
 
 //-------------------------------------------------------------------------------------------
-#pragma mark - {{ prefix }}{{ module_info.name }}ViewInput Methods
+#pragma mark - {{ prefix }}{{ module_name }}ViewInput Methods
 //-------------------------------------------------------------------------------------------
 
 - (void)setupInitialState

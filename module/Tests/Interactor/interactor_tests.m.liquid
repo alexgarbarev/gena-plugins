@@ -3,19 +3,19 @@
 #import <XCTest/XCTest.h>
 #import <OCMock/OCMock.h>
 
-#import "{{ prefix }}{{ module_info.name }}Interactor.h"
+#import "{{ prefix }}{{ module_name }}Interactor.h"
 
-#import "{{ prefix }}{{ module_info.name }}InteractorOutput.h"
+#import "{{ prefix }}{{ module_name }}InteractorOutput.h"
 
-@interface {{ prefix }}{{ module_info.name }}InteractorTests : XCTestCase
+@interface {{ prefix }}{{ module_name }}InteractorTests : XCTestCase
 
-@property (nonatomic, strong) {{ prefix }}{{ module_info.name }}Interactor *interactor;
+@property (nonatomic, strong) {{ prefix }}{{ module_name }}Interactor *interactor;
 
 @property (nonatomic, strong) id mockOutput;
 
 @end
 
-@implementation {{ prefix }}{{ module_info.name }}InteractorTests
+@implementation {{ prefix }}{{ module_name }}InteractorTests
 
 //-------------------------------------------------------------------------------------------
 #pragma mark - Setup
@@ -25,9 +25,9 @@
 {
     [super setUp];
 
-    self.interactor = [[{{ prefix }}{{ module_info.name }}Interactor alloc] init];
+    self.interactor = [[{{ prefix }}{{ module_name }}Interactor alloc] init];
 
-    self.mockOutput = OCMProtocolMock(@protocol({{ prefix }}{{ module_info.name }}InteractorOutput));
+    self.mockOutput = OCMProtocolMock(@protocol({{ prefix }}{{ module_name }}InteractorOutput));
 
     self.interactor.output = self.mockOutput;
 }
@@ -42,7 +42,7 @@
 }
 
 //-------------------------------------------------------------------------------------------
-#pragma mark - Testing {{ prefix }}{{ module_info.name }}InteractorInput methods
+#pragma mark - Testing {{ prefix }}{{ module_name }}InteractorInput methods
 //-------------------------------------------------------------------------------------------
 
 @end

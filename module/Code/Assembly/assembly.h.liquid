@@ -4,11 +4,9 @@
 
 @protocol CCModule;
 
-/**
- * {{ module_info.description }}
- */
-@interface {{ prefix }}{{ module_info.name }}Assembly : TyphoonAssembly
 
-- (id<CCModule>)module{{ module_info.name }};
+@interface {{ prefix }}{{ module_name }}Assembly : TyphoonAssembly
+
+- (id<CCModule>)module{{ module_name }};
 
 @end

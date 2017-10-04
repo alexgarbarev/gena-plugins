@@ -1,16 +1,16 @@
 {% include 'header' %}
 
 #import "CCGeneralPresenter.h"
-#import "{{ prefix }}{{ custom_parameters.view }}ViewInputOutput.h"
-#import "{{ prefix }}{{ custom_parameters.interactor }}InteractorInputOutput.h"
-#import "{{ prefix }}{{ module_info.name }}ModuleInput.h"
+#import "{{ prefix }}{{ view }}ViewInputOutput.h"
+#import "{{ prefix }}{{ interactor }}InteractorInputOutput.h"
+#import "{{ prefix }}{{ module_name }}ModuleInput.h"
 
-@protocol {{ prefix }}{{ module_info.name }}RouterInput;
+@protocol {{ prefix }}{{ module_name }}RouterInput;
 
-@interface {{ prefix }}{{ module_info.name }}Presenter : CCGeneralPresenter <{{ prefix }}{{ module_info.name }}ModuleInput, {{ prefix }}{{ custom_parameters.view }}ViewOutput, {{ prefix }}{{ custom_parameters.interactor }}InteractorOutput>
+@interface {{ prefix }}{{ module_name }}Presenter : CCGeneralPresenter <{{ prefix }}{{ module_name }}ModuleInput, {{ prefix }}{{ view }}ViewOutput, {{ prefix }}{{ interactor }}InteractorOutput>
 
-@property (nonatomic, weak) id<{{ prefix }}{{ custom_parameters.view }}ViewInput> view;
-@property (nonatomic, strong) id<{{ prefix }}{{ custom_parameters.interactor }}InteractorInput> interactor;
-@property (nonatomic, strong) id<{{ prefix }}{{ module_info.name }}RouterInput> router;
+@property (nonatomic, weak) id<{{ prefix }}{{ view }}ViewInput> view;
+@property (nonatomic, strong) id<{{ prefix }}{{ interactor }}InteractorInput> interactor;
+@property (nonatomic, strong) id<{{ prefix }}{{ module_name }}RouterInput> router;
 
 @end

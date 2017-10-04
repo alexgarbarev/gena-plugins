@@ -3,15 +3,15 @@
 #import <XCTest/XCTest.h>
 #import <OCMock/OCMock.h>
 
-#import "{{ prefix }}{{ module_info.name }}Presenter.h"
+#import "{{ prefix }}{{ module_name }}Presenter.h"
 
-#import "{{ prefix }}{{ module_info.name }}ViewInput.h"
-#import "{{ prefix }}{{ module_info.name }}InteractorInput.h"
-#import "{{ prefix }}{{ module_info.name }}RouterInput.h"
+#import "{{ prefix }}{{ module_name }}ViewInput.h"
+#import "{{ prefix }}{{ module_name }}InteractorInput.h"
+#import "{{ prefix }}{{ module_name }}RouterInput.h"
 
-@interface {{ prefix }}{{ module_info.name }}PresenterTests : XCTestCase
+@interface {{ prefix }}{{ module_name }}PresenterTests : XCTestCase
 
-@property (nonatomic, strong) {{ prefix }}{{ module_info.name }}Presenter *presenter;
+@property (nonatomic, strong) {{ prefix }}{{ module_name }}Presenter *presenter;
 
 @property (nonatomic, strong) id mockInteractor;
 @property (nonatomic, strong) id mockRouter;
@@ -19,7 +19,7 @@
 
 @end
 
-@implementation {{ prefix }}{{ module_info.name }}PresenterTests
+@implementation {{ prefix }}{{ module_name }}PresenterTests
 
 //-------------------------------------------------------------------------------------------
 #pragma mark - Setup
@@ -29,11 +29,11 @@
 {
     [super setUp];
 
-    self.presenter = [[{{ prefix }}{{ module_info.name }}Presenter alloc] init];
+    self.presenter = [[{{ prefix }}{{ module_name }}Presenter alloc] init];
 
-    self.mockInteractor = OCMProtocolMock(@protocol({{ prefix }}{{ module_info.name }}InteractorInput));
-    self.mockRouter = OCMProtocolMock(@protocol({{ prefix }}{{ module_info.name }}RouterInput));
-    self.mockView = OCMProtocolMock(@protocol({{ prefix }}{{ module_info.name }}ViewInput));
+    self.mockInteractor = OCMProtocolMock(@protocol({{ prefix }}{{ module_name }}InteractorInput));
+    self.mockRouter = OCMProtocolMock(@protocol({{ prefix }}{{ module_name }}RouterInput));
+    self.mockView = OCMProtocolMock(@protocol({{ prefix }}{{ module_name }}ViewInput));
 
     self.presenter.interactor = self.mockInteractor;
     self.presenter.router = self.mockRouter;
@@ -52,11 +52,11 @@
 }
 
 //-------------------------------------------------------------------------------------------
-#pragma mark - Testing {{ prefix }}{{ module_info.name }}ModuleInput methods
+#pragma mark - Testing {{ prefix }}{{ module_name }}ModuleInput methods
 //-------------------------------------------------------------------------------------------
 
 //-------------------------------------------------------------------------------------------
-#pragma mark - Testing {{ prefix }}{{ module_info.name }}ViewOutput methods
+#pragma mark - Testing {{ prefix }}{{ module_name }}ViewOutput methods
 //-------------------------------------------------------------------------------------------
 
 - (void)test_that_presenter_handles_viewReady_event 
@@ -72,7 +72,7 @@
 }
 
 //-------------------------------------------------------------------------------------------
-#pragma mark - Testing {{ prefix }}{{ module_info.name }}InteractorOutput methods
+#pragma mark - Testing {{ prefix }}{{ module_name }}InteractorOutput methods
 //-------------------------------------------------------------------------------------------
 
 @end

@@ -1,13 +1,13 @@
 {% include 'header' %}
 
 #import "CCMapping.h"
-#import "{{ custom_parameters.class_name }}.h"
+#import "{{ class_name }}.h"
 
-@interface {{ prefix }}{{ module_info.name }}Mapping : CCMapping <TRCObjectMapper>
-{% if custom_parameters.include_request %}
-- (NSDictionary *)requestObjectFromObject:({{ custom_parameters.class_name }} *)object error:(NSError **)error;{% endif %}
+@interface {{ prefix }}{{ name }}Mapping : CCMapping <TRCObjectMapper>
+{% if include_request %}
+- (NSDictionary *)requestObjectFromObject:({{ class_name }} *)object error:(NSError **)error;{% endif %}
 
-- ({{ custom_parameters.class_name }} *)objectFromResponseObject:(NSDictionary *)responseObject error:(NSError **)error;
+- ({{ class_name }} *)objectFromResponseObject:(NSDictionary *)responseObject error:(NSError **)error;
 
 
 @end

@@ -1,9 +1,9 @@
 {% include 'header' %}
 
-#import "{{ prefix }}{{ module_info.name }}InteractorInputOutput.h"
+#import "{{ prefix }}{{ module_name }}InteractorInputOutput.h"
 
-@interface {{ prefix }}{{ module_info.name }}Interactor : NSObject <{{ prefix }}{{ module_info.name }}InteractorInput>
+@interface {{ prefix }}{{ module_name }}Interactor : NSObject <{{ prefix }}{{ module_name }}InteractorInput>
 
-@property (nonatomic, weak) id<{{ prefix }}{{ module_info.name }}InteractorOutput> output;
+@property (nonatomic, weak) id<{{ prefix }}{{ module_name }}InteractorOutput> output;
 
 @end
