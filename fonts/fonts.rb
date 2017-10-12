@@ -21,7 +21,7 @@ module Gena
 
       def self.plugin_config_defaults
         defaults = Hash.new
-        defaults['category'] = 'Sources/Presentation/Common/Categories'
+        defaults['category'] = 'Presentation/Common/Categories'
         fonts = `find . -iname '*.otf' -o -iname '*.ttf' -path Pods -prune`.strip.split('./')
         fonts_path = common_path(fonts)
         if fonts_path.empty?
