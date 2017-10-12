@@ -105,7 +105,7 @@ module Gena
         font_name.gsub!("-", "")
         font_name.gsub!(" ", "")
         font_name.strip!
-        font_name[0,1].downcase + font_name[1..-1]
+        config['prefix'].downcase + '_' + font_name[0,1].downcase + font_name[1..-1]
       end
 
     end
