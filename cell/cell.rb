@@ -3,13 +3,20 @@ module Gena
   class Cell < Plugin
 
     desc 'cell CELL_NAME', 'Generates cell and it\'s item to use with CCTableViewManager'
-    method_option :path, :aliases => '-p', :desc => 'Specifies custom subdirectory'
+    method_option :path, :aliases => '-p', :desc => 'Specifies custom subdirectory (relative to path from gena.plist)'
+    method_option :absolute_path, :aliases => '-a', :desc => 'Specifies custom absolute path'
 
     def cell(cell_name)
 
-      path = self.plugin_config['path']
-      path = File.join(path, options[:path]) if options[:path]
-      path = File.join(path, cell_name)
+      path = ''
+      if options[:absolute_path] then
+        path = options[:absolute_path]
+        path = File.join(path, cell_name)
+      else
+        path = self.plugin_config['path']
+        path = File.join(path, options[:path]) if options[:path]
+        path = File.join(path, cell_name)
+      end
 
       codegen = Codegen.new(path, {'cell_name' => cell_name})
 
