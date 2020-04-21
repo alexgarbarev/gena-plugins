@@ -1,0 +1,42 @@
+{% include 'header' %}
+
+#import "{{ full_prefix }}{{ name }}.h"
+#import "{{ class_name }}.h"
+#import "CCAPIClient+Infrastructure.h"
+
+@implementation {{ full_prefix }}{{ name }}
+
+REGISTER_COMPONENT({{ client_class }})
+
++ (void)registerWithAPIClient:(CCAPIClient *)apiClient
+{
+    [apiClient.restClient registerObjectMapper:[{{ full_prefix }}{{ name }} new] forTag:@"{{ mapping_tag }}"];
+}
+
+//-------------------------------------------------------------------------------------------
+#pragma mark - Request
+//-------------------------------------------------------------------------------------------
+
+- (NSDictionary *)requestObjectFromObject:({{ class_name }} *)object error:(NSError **)error
+{
+    NSMutableDictionary *requestDict = [NSMutableDictionary new];
+{{ properties_composing }}
+    return requestDict;
+}
+
+//-------------------------------------------------------------------------------------------
+#pragma mark - Response
+//-------------------------------------------------------------------------------------------
+
+- ({{class_name }} *)objectFromResponseObject:(NSDictionary *)responseObject error:(NSError **)error
+{
+{% if shared %}    {{ class_name }} *instance = [{{ class_name }} instanceWithId:responseObject[@"{{ id_key }}"]];
+    [instance modifyWithBlock:^{
+{{ properties_parsing }}
+
+    }];{% else %}    {{ class_name }} *instance = [{{ class_name }} new];
+{{ properties_parsing }}{% endif %}
+    return instance;
+}
+
+@end

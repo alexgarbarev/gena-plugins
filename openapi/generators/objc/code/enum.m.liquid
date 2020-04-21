@@ -1,0 +1,13 @@
+{% include 'header' %}
+
+#import "{{ enum_type }}.h"
+
+@interface CCEnum (Private)
+
+- (instancetype _Nonnull)initWithValue:(id _Nonnull)value;
+
+@end
+
+
+
+{{ enum_def }}

@@ -1,0 +1,73 @@
+{% include 'header' %}
+
+#import <TyphoonRestClient/TyphoonRestClient.h>
+#import "{{ full_prefix }}{{ request_name }}.h"
+
+
+@implementation {{ full_prefix }}{{ request_name }}
+
+//-------------------------------------------------------------------------------------------
+#pragma mark - Required Methods
+//-------------------------------------------------------------------------------------------
+
+- (NSString *)path
+{
+    return @"{{ path }}";
+}
+
+- (TRCRequestMethod)method
+{
+    return TRCRequestMethod{{ http_method }};
+}
+
+{% if path_params %}
+- (NSDictionary *)pathParameters
+{
+    return @{
+{{ path_params }}
+    };
+}{% endif %}
+
+//-------------------------------------------------------------------------------------------
+#pragma mark - Request Methods
+//-------------------------------------------------------------------------------------------
+{% if include_request_path %}
+- (NSDictionary *)pathParameters
+{
+    return @{ };
+}{% endif %}
+{% if include_request_body %}
+- (id)requestBody
+{
+    return @{
+
+    };
+}{% endif %}
+
+{% if request_body %}- (id)requestBody
+{
+{{ request_body }}
+}
+
+- (TRCSerialization)requestBodySerialization
+{
+    return {{request_body_serializarion}};
+}{% endif %}
+
+//-------------------------------------------------------------------------------------------
+#pragma mark - Response Methods
+//-------------------------------------------------------------------------------------------
+
+{% if response_body_serialization %}- (TRCSerialization)responseBodySerialization
+{
+    return {{response_body_serialization}};
+}{% endif %}
+
+- ({{ response_class }})responseProcessedFromBody:(id)responseBody headers:(NSDictionary *)responseHeaders
+                                  status:(TRCHttpStatusCode)statusCode error:(NSError **)parseError
+{
+{{ response_body }}
+}
+
+
+@end

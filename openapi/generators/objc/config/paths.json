@@ -1,0 +1,6 @@
+{
+  "models": "Components/Services/Products/Network/TRC/objc/Generated/Models",
+  "requests": "Components/Services/Products/Network/TRC/objc/Generated/Requests",
+  "mappers": "Components/Services/Products/Network/TRC/objc/Generated/Mappings",
+  "api_client": "Components/Services/Products/Network/TRC/objc/Generated/Client"
+}

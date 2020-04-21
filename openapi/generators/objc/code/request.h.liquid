@@ -1,0 +1,17 @@
+{% include 'header' %}
+
+{{ imports }}
+
+/**
+ * {{ description }}
+ */
+
+@interface {{ full_prefix }}{{ request_name }} : {{ base_class }}
+
+{{ input_properties }}
+
+{{ response_descr }}
+- (nonnull {{ response_class }})responseProcessedFromBody:(nonnull id)bodyObject headers:(nonnull NSDictionary *)responseHeaders
+                         status:(TRCHttpStatusCode)statusCode error:(NSError * _Nullable * _Nullable)parseError;
+
+@end

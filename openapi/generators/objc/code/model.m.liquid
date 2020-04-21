@@ -1,0 +1,16 @@
+{% include 'header' %}
+
+#import "{{ model_class }}.h"
+
+{{ constants_m }}
+
+@implementation {{ model_class }}
+
+{{ constructor_m }}
+{% if shared %}+ (NSString *)identifierKey
+{
+    return @"{{ id_property }}";
+}
+{% endif %}
+{{ description }}
+@end

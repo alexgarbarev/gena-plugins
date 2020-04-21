@@ -1,0 +1,13 @@
+{% include 'header' %}
+
+#import "TyphoonRestClient.h"
+#import "{{ class_name }}.h"
+
+@interface {{ full_prefix }}{{ name }}: NSObject <TRCObjectMapper>
+
+- (NSDictionary *)requestObjectFromObject:({{ class_name }} *)object error:(NSError **)error;
+
+- ({{ class_name }} *)objectFromResponseObject:(NSDictionary *)responseObject error:(NSError **)error;
+
+
+@end

@@ -1,0 +1,15 @@
+# require "json"
+require "uri"
+require "yaml"
+
+# require "addressable/uri"
+# require "json_schema"
+
+require_relative "open_api_parser/document"
+require_relative "open_api_parser/file_cache"
+require_relative "open_api_parser/pointer"
+require_relative "open_api_parser/specification"
+require_relative "open_api_parser/specification/endpoint"
+require_relative "open_api_parser/specification/root"
+require_relative "open_api_parser/specification/model"
+require_relative "open_api_parser/version"

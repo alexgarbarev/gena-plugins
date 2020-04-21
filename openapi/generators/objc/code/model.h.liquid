@@ -1,0 +1,14 @@
+{% include 'header' %}
+
+#import <Foundation/Foundation.h>
+{{ imports }}
+
+{{ constants }}
+
+@interface {{ model_class }}{{ generics }} : {{ model_base_class }}
+
+{{ properties }}
+
+{{ constructor }}
+
+@end
